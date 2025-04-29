@@ -16,6 +16,12 @@ app.use('/', createProxyMiddleware({
     res.setHeader('X-Response-Time', `${duration}ms`);
   }
 }));
+app.get('/ip', async (req, res) => {
+  const response = await fetch('https://api.ipify.org');
+  const ip = await response.text();
+  res.send(`My public IP is: ${ip}`);
+});
+
 
 app.listen(port, () => {
   console.log(`App is listening on port ${port}`)
